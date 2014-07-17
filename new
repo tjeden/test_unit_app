@@ -1,0 +1,4 @@
+assert_response :redirect
+assert_redirected_to products_path
+delete :destroy, # tu potrzebujemy id produktu, który usuwamy
+

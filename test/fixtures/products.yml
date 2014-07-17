@@ -1,0 +1,12 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+harry_potter:
+  title: Harry Potter i magiczna szafa
+  price: 39.99
+  description: 8 część przygód, czarodziej i szafa
+
+paragraf_22:
+  title: Catch 22
+  price: 49.99
+  description: Takie tam z Sycylii
+

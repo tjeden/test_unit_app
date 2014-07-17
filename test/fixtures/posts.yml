@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: Hello World
+  body: Mój pierwszy post
+  author: Aleksander Dąbrowski
+
+two:
+  title: OneOneOne1111!!!!1111
+  body: Troll harder!
+  author: Troll spod mostu
