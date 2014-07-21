@@ -31,12 +31,13 @@ class ProductsControllerTest < ActionController::TestCase
   end
 
   test "create new product" do
+    attributes = FactoryGirl.attributes_for(:product)
     assert_difference("Product.count", 1) do
-      post :create, product: {title: "Ojciec chrzestny", price:49, description: "Mario Puzo"}
+      post :create, product: attributes
     end
-    assert_equal "Ojciec chrzestny", assigns(:product).title
-    assert_equal 49, assigns(:product).price
-    assert_equal "Mario Puzo",  assigns(:product).description
+    assert_equal attributes[:title], assigns(:product).title
+    assert_equal attributes[:price], assigns(:product).price
+    assert_equal attributes[:description],  assigns(:product).description
     assert_response :redirect
     assert_redirected_to products_path
   end
@@ -47,5 +48,34 @@ class ProductsControllerTest < ActionController::TestCase
     end
     assert_response :success
     assert_template :new
+  end
+
+  test "show edit form" do
+    get :edit, id: products(:paragraf_22).id
+    assert_response :success
+    assert_template :edit
+    assert_equal products(:paragraf_22), assigns(:product)
+  end
+
+  test "update product" do
+    attributes = FactoryGirl.attributes_for(:product)
+    patch :update, id: products(:paragraf_22).id, product: attributes
+
+    product = Product.find(products(:paragraf_22).id)
+    assert_equal attributes[:title], product.title
+    assert_equal attributes[:price], product.price
+    assert_equal attributes[:description], product.description
+    assert_response :redirect
+    assert_redirected_to products_path
+  end
+
+  test "update products with invalid attributes" do
+    patch :update, id: products(:paragraf_22).id, product: { title: "A", price: 12, description: "OK"}
+    product = Product.find(products(:paragraf_22).id)
+    assert_not_equal "A", product.title
+    assert_not_equal 12, product.price
+    assert_not_equal "OK", product.description
+    assert_response :success
+    assert_template :edit
   end
 end

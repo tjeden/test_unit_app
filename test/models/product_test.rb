@@ -40,8 +40,8 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   test "title must be unique" do
-    title = products(:paragraf_22).title
-    duplicate = Product.new(title: title, price: 100, description: "Good Book")
+    first_product = FactoryGirl.create(:product, title: "ABCD")
+    duplicate = FactoryGirl.build(:product, title: "ABCD")
     assert_equal false, duplicate.save, "Saved with the same name"
     assert duplicate.errors.messages[:title], "No errors on title"
   end
